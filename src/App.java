@@ -10,7 +10,8 @@ public class App {
                 new Filmas("The Dark Knight",9.0f,"Action"),
                 new Filmas("The Godfather Part II",9.0f,"Crime"),
                 new Filmas("12 Angry Men",9.0f,"Drama"),
-                new Filmas("Schindlers List",8.9f,"Drama")
+                new Filmas("Schindlers List",8.9f,"Drama"),
+                new Filmas("Naujas filmas",8.9f,"Comedy")
         );
 
         var filmaiPagalZanra = filmai.stream()
