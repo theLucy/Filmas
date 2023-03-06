@@ -4,11 +4,12 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class App {
-    public static void main(String[] args) {
 
-        Scanner in = new Scanner(System.in);
+    static Scanner in = new Scanner(System.in);
+    public static void main(String[] args) {
 
         Consumer<String> printToSout = System.out::println;
         Consumer<String> printToFile = App::printToFile;
@@ -27,16 +28,52 @@ public class App {
                 new Filmas("Naujas filmas", 8.9f, "Comedy", 200)
         );
 
+        var filmaiString = findFilm(filmai);
+
+        if(filmaiString.isPresent()) {
+            System.out.print("""
+                Kur norite isvesti rezultata:
+                1 > i ekrana
+                2 > i faila
+                3 > i ekrana ir i faila
+                """);
+            var isvedimas = switch (in.nextLine()) {
+                case "2" -> printToFile;
+                case "3" -> printToSoutAndFile;
+                default -> printToSout;
+            };
+           isvedimas.accept(filmaiString.get());
+        }
+
+    }
+
+    private static void printToFile(String x) {
+        try {
+            Files.writeString(new File("filmas.txt").toPath(),
+                    x, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
+        } catch (IOException e) {
+            System.err.println(e);
+            System.err.println("Ivyko failo rasymo klaida!");
+        }
+    }
+
+    public static Optional<String> findFilm(List<Filmas> filmai) {
         System.out.print("""
                 Pagal ka norite filmus filtruoti:
                 1 > trumpus filmus
                 2 > geriausiai ivertintus
                 3 > dramas
+                4 > pagal zodi pavadinime
                 """);
         var filtras = switch (in.nextLine()) {
             case "1" -> Filmas.isShortFilm;
             case "2" -> Filmas.hasHighRating;
             case "3" -> Filmas.isDrama;
+            case "4" -> {
+                String zodis = in.next().toLowerCase();
+                in.nextLine();
+                yield (Predicate<Filmas>) o -> o.getPavadinimas().toLowerCase().contains(zodis);
+            }
             default -> Filmas.defaultFilter;
         };
 
@@ -58,35 +95,12 @@ public class App {
             default -> Filmas.byName;
         };
 
-        System.out.print("""
-                Kur norite isvesti rezultata:
-                1 > i ekrana
-                2 > i faila
-                3 > i ekrana ir i faila
-                """);
-        var isvedimas = switch (in.nextLine()) {
-            case "2" -> printToFile;
-            case "3" -> printToSoutAndFile;
-            default -> printToSout;
-        };
-
-
         var filmaiString = filmai.stream()
                 .filter(filtras)
                 .sorted(rusiavimas)
                 .map(filmas -> filmas.toString().concat(System.lineSeparator()))
                 .reduce("", String::concat);
 
-        isvedimas.accept(filmaiString);
-    }
-
-    private static void printToFile(String x) {
-        try {
-            Files.writeString(new File("filmas.txt").toPath(),
-                    x, StandardOpenOption.APPEND, StandardOpenOption.CREATE);
-        } catch (IOException e) {
-            System.err.println(e);
-            System.err.println("Ivyko failo rasymo klaida!");
-        }
+        return filmaiString.length() == 0 ? Optional.empty() : Optional.of(filmaiString);
     }
 }
