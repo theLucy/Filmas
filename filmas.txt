@@ -1,0 +1,12 @@
+Filmas{pavadinimas='12 Angry Men', ivertinimas=9.0, zanras='Drama', trukme=30}
+Filmas{pavadinimas='Schindlers List', ivertinimas=8.9, zanras='Drama', trukme=59}
+Filmas{pavadinimas='The Godfather Part II', ivertinimas=9.0, zanras='Crime', trukme=20}
+Filmas{pavadinimas='The Dark Knight', ivertinimas=9.0, zanras='Action', trukme=100}
+Filmas{pavadinimas='The Godfather Part II', ivertinimas=9.0, zanras='Crime', trukme=20}
+Filmas{pavadinimas='12 Angry Men', ivertinimas=9.0, zanras='Drama', trukme=30}
+Filmas{pavadinimas='The Shawshank Redemption', ivertinimas=9.2, zanras='Drama', trukme=90}
+Filmas{pavadinimas='The Godfather', ivertinimas=9.2, zanras='Crime', trukme=80}
+Filmas{pavadinimas='12 Angry Men', ivertinimas=9.0, zanras='Drama', trukme=30}Filmas{pavadinimas='Schindlers List', ivertinimas=8.9, zanras='Drama', trukme=59}Filmas{pavadinimas='The Godfather Part II', ivertinimas=9.0, zanras='Crime', trukme=20}
+Filmas{pavadinimas='12 Angry Men', ivertinimas=9.0, zanras='Drama', trukme=30}
+Filmas{pavadinimas='Schindlers List', ivertinimas=8.9, zanras='Drama', trukme=59}
+Filmas{pavadinimas='The Godfather Part II', ivertinimas=9.0, zanras='Crime', trukme=20}
